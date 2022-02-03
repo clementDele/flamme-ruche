@@ -1,0 +1,13 @@
+.rider {
+    display: flex;
+    margin: auto;
+    height: 40%;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.rider > p {
+    margin: auto;
+    color: white;
+}
