@@ -3,20 +3,21 @@ import { RIDER_TYPE } from '../../const';
 import { Hand } from '../Hand/Hand';
 import './PlayerBoard.css'
 
-export const PlayerBoard = ({ G, ctx, moves }) => {
-    const rouleurHand = G.players[ctx.currentPlayer].riders[RIDER_TYPE.ROULEUR.ID].hand
-    const sprinteurHand = G.players[ctx.currentPlayer].riders[RIDER_TYPE.SPRINTEUR.ID].hand
-    const team = G.players[ctx.currentPlayer].team
+export const PlayerBoard = ({ G, ctx, moves, playerID }) => {
+    const rouleurHand = G.players[playerID].riders[RIDER_TYPE.ROULEUR.ID].hand
+    const sprinteurHand = G.players[playerID].riders[RIDER_TYPE.SPRINTEUR.ID].hand
+    const team = G.players[playerID].team
 
 
     return (
         <div id="playerBoard">
             <div className='rider-cards'>
-                <div className="card" onClick={() => moves.pickRouleurOrSprinteur(RIDER_TYPE.SPRINTEUR.ID)}>
+                <div className="card" onClick={() => moves.pickRouleurOrSprinteur(playerID, RIDER_TYPE.SPRINTEUR.ID)}>
                     <img src={`./cards/backs/${RIDER_TYPE.SPRINTEUR.ID}.png`} alt="sprinteur-deck"/>
                 </div>
                 {sprinteurHand.length === 4 ? 
-                    <Hand 
+                    <Hand
+                        playerID={playerID}
                         hand={sprinteurHand} 
                         team={team} 
                         type={RIDER_TYPE.SPRINTEUR.ID}
@@ -24,11 +25,12 @@ export const PlayerBoard = ({ G, ctx, moves }) => {
                     /> : <></>}
             </div>
             <div className='rider-cards'>
-                <div className="card" onClick={() => moves.pickRouleurOrSprinteur(RIDER_TYPE.ROULEUR.ID)}>
+                <div className="card" onClick={() => moves.pickRouleurOrSprinteur(playerID, RIDER_TYPE.ROULEUR.ID)}>
                     <img src={`./cards/backs/${RIDER_TYPE.ROULEUR.ID}.png`} alt="rouleur-deck"/>
                 </div>
                 {rouleurHand.length === 4 ? 
                     <Hand 
+                        playerID={playerID}
                         hand={rouleurHand} 
                         team={team} 
                         type={RIDER_TYPE.ROULEUR.ID}

@@ -111,10 +111,14 @@ const I = [SQUARE_TYPE.ROAD, SQUARE_TYPE.ROAD];
 const Q = [SQUARE_TYPE.ASCENT, SQUARE_TYPE.ASCENT];
 const T = [SQUARE_TYPE.ROAD, SQUARE_TYPE.ROAD];
 
-const AVENUE_CORSO_PASEO = [
-    ["Avenue Corso Paseo"],
-    [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u]
-];
+const AVENUE_CORSO_PASEO = {
+    NAME: "Avenue Corso Paseo",
+    TILES: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u]
+};
+const AVENUE_CORSO_PASEO_SHORT = {
+    NAME: "Avenue Corso Paseo Short",
+    TILES: [a, b, t, u]
+};
 const FIRENZE_MILANO = {
     NAME: "Firenze-Milano",
     TILES: [a, b, c, g, i, D, H, q, n, t, m, K, O, L, r, e, p, J, s, f, u]
@@ -168,9 +172,9 @@ const ENTRE_COTES = [
     [a, d, e, N, i, b, j, p, O, K, R, L, t, C, F, S, q, M, h, u]
 ];
 
-
 export const TRACK = {
     AVENUE_CORSO_PASEO,
+    AVENUE_CORSO_PASEO_SHORT,
     FIRENZE_MILANO,
     RONDE_VAN_WELVEGEN,
     LA_HAUTE_MONTAGNE,
@@ -183,5 +187,5 @@ export const TRACK = {
     NANTUA,
     PAU,
     ASGER,
-    ENTRE_COTES
+    ENTRE_COTES,
 }

@@ -1,18 +1,20 @@
 import { INVALID_MOVE } from "boardgame.io/core";
-import { CARD, POS, RIDER_TYPE, SQUARE_TYPE } from "../const";
-import { shuffle, reverse, min, max } from 'lodash';
+import { POS, RIDER_TYPE } from "../const";
+import { shuffle, reverse, min } from 'lodash';
+import { getNextMoveFromCard } from "./Movement";
 
-export const pickRouleurOrSprinteur = (G, ctx, riderID) => {
-    G.players[ctx.currentPlayer].choosenRider = riderID
 
-    drawCards(G, ctx)
+export const pickRouleurOrSprinteur = (G, ctx, playerID, riderID) => {
+    G.players[playerID].choosenRider = riderID
+
+    drawCards(G, playerID)
 
     ctx.events.endStage()
 }
 
-const drawCards = (G, ctx) => {
-    const riderID = G.players[ctx.currentPlayer].choosenRider
-    let rider = G.players[ctx.currentPlayer].riders[riderID]
+const drawCards = (G, playerID) => {
+    const riderID = G.players[playerID].choosenRider
+    let rider = G.players[playerID].riders[riderID]
 
     if (rider.hand.length !== 0) {
         return INVALID_MOVE
@@ -23,15 +25,15 @@ const drawCards = (G, ctx) => {
         rider.deck = reverse(rider.deck)
     }
 
-    for (let i = 0; i < 4; i++) rider.hand.push(rider.deck.pop());
+    for (let i = 0; i < min([rider.deck.length, 4]); i++) rider.hand.push(rider.deck.pop());
 }
 
-export const pickCard = (G, ctx, cardID) => {
-    const riderID = G.players[ctx.currentPlayer].choosenRider
-    let rider = G.players[ctx.currentPlayer].riders[riderID]
-    let hasPlayed = G.players[ctx.currentPlayer].hasPlayed
+export const pickCard = (G, ctx, cardID, playerID) => {
+    const riderID = G.players[playerID].choosenRider
+    let rider = G.players[playerID].riders[riderID]
+    let hasPlayed = G.players[playerID].hasPlayed
 
-    rider.nextMove = getNextMoveFromCard(rider.hand[cardID], G.track.squares[rider.position[POS.X]])
+    rider.nextMove = getNextMoveFromCard(rider.hand[cardID], G.track.squares, rider.position[POS.X])
 
     // discard unplayed cards
     rider.discardPile.push(...rider.hand.filter((_, id) => id !== cardID))
@@ -43,29 +45,11 @@ export const pickCard = (G, ctx, cardID) => {
     else if (riderID === RIDER_TYPE.SPRINTEUR.ID) hasPlayed.sprinteur = true
 
     if (hasPlayed.rouleur && hasPlayed.sprinteur) {
-        ctx.events.endTurn()
+        ctx.events.setStage({ stage: "waitingStage" })
     }
     else {
-        G.players[ctx.currentPlayer].choosenRider = 1 - G.players[ctx.currentPlayer].choosenRider
-        drawCards(G, ctx)
+        G.players[playerID].choosenRider = 1 - G.players[playerID].choosenRider
+        drawCards(G, playerID)
     }
 }
 
-export const getNextMoveFromCard = (card, square) => {
-    let steps = (card === CARD.FATIGUE.LABEL) ? CARD.FATIGUE.VALUE : card
-
-    switch (square.type) {
-        case SQUARE_TYPE.ASCENT:
-            steps = min([steps, 5])
-            break;
-    
-        case SQUARE_TYPE.DESCENT:
-            steps = max([steps, 5])
-            break;
-        
-        default:
-            // Do nothing
-    }
-
-    return steps
-}

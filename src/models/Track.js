@@ -25,6 +25,6 @@ const getStartLine = squares =>  {
     return squares.map(sq => sq.type).lastIndexOf(SQUARE_TYPE.START)
 }
 
-const getFinishLine= squares => {
+const getFinishLine = squares => {
     return squares.map(sq => sq.type).indexOf(SQUARE_TYPE.FINISH)
 }

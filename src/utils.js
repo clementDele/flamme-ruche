@@ -1,3 +1,5 @@
+import { SQUARE_TYPE } from "./const"
+
 export const buildFrontRiderFromRiderID = riderID => {
     const idSplit = riderID.split("_")
     
@@ -8,15 +10,15 @@ export const buildFrontRiderFromRiderID = riderID => {
 }
 
 export const getRiderFromRiderId = (players, riderID) => {
-    let retRider = null
+    let rider = null
 
-    players.forEach(player => {
-        player.riders.forEach(rider => {
-            if (riderID === rider.id) retRider = rider
-        });
-    });
+    for (const player of Object.values(players)){
+        for (let i = 0; i < 2; i++) {
+            if (riderID === player.riders[i].id) rider = player.riders[i]
+        }
+    };
 
-    return retRider
+    return rider
 }
 
 export const getRiderOrder = (G) => {
@@ -34,20 +36,43 @@ export const getRiderOrder = (G) => {
 
 
 export const resetRidersStates = players => {
-    players.forEach(player => {
+    for (const player of Object.values(players)){
         player.hasPlayed.rouleur = false
         player.hasPlayed.sprinteur = false
         player.riders.forEach(rider => {
             rider.nextMove = 0
         });
-    });
+    };
 }
 
 export const hasEveryonePlayed = players => {
     let hasEveryonePlayed = true
-    players.forEach(player => {
+    for (const player of Object.values(players)){
         if (!player.hasPlayed.rouleur || !player.hasPlayed.sprinteur) hasEveryonePlayed = false
-    });
+    };
 
     return hasEveryonePlayed
+}
+
+export const nextAscentSquareDistance = (squares, riderPos) => {
+    for (let i = riderPos; i < squares.length; i++) {
+        if (squares[i].type === SQUARE_TYPE.ASCENT) return i - riderPos
+    }
+
+    // If no ascent left, return distance until end of track
+    return squares.length - riderPos
+}
+
+export const aRiderHasFinished = track => {
+    for (let i = track.finishLine; i < track.squares.length; i++) {
+        if (track.squares[i].rightLane !== null) return true
+    }
+
+    return false
+}
+
+export const getWinner = track => {
+    for (let i = track.squares.length - 1; i >= track.finishLine; i--) {
+        if (track.squares[i].rightLane !== null) return track.squares[i].rightLane
+    }
 }

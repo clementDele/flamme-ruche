@@ -1,3 +1,0 @@
-- Ajouter extension Peloton
-- Ajouter extension Météo
-- Possibilité de faire des grands tours

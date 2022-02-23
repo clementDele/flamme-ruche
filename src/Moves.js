@@ -3,7 +3,7 @@ import { SQUARE } from "./const"
 export const PlaceRiders = game => {
     const players = game.players
 
-    players.forEach((player, index) => {
+    for (const [index, player] of Object.entries(players)){
         const riders = player.riders
 
         if (riders.length === 2) {
@@ -18,5 +18,5 @@ export const PlaceRiders = game => {
         } else {
             console.error(`there should be two riders but there is ${riders.length}`)
         }
-    });
+    };
 }

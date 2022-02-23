@@ -32,7 +32,7 @@ export const resolveSlipstream = G => {
     
     while (repeat) {
         repeat = false
-        for (let posX = 0; posX < G.track.squares.length; posX++) {
+        for (let posX = 0; posX < G.track.finishLine - 1; posX++) {
             // check if there is a rider at this pos
             if (G.track.squares[posX].rightLane !== null) {
 
@@ -63,7 +63,7 @@ export const resolveSlipstream = G => {
 }
 
 export const resolveExhaustion = G => {
-    for (let posX = 0; posX < G.track.squares.length; posX++) {
+    for (let posX = 0; posX < G.track.finishLine; posX++) {
         // check if there is a rider at this pos
         if (G.track.squares[posX].rightLane !== null) {
 

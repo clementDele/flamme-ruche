@@ -3,27 +3,29 @@ import { Player } from "../models/Player";
 import { Track } from "../models/Track";
 import { PlaceRiders } from "../Moves";
 import { pickCard, pickRouleurOrSprinteur } from "./Moves";
-import { ActivePlayers } from "boardgame.io/core";
+import { ActivePlayers, PlayerView } from "boardgame.io/core";
 import { resolveExhaustion, resolveMoves, resolveSlipstream } from "./Resolves";
-import { resetRidersStates, hasEveryonePlayed } from "../utils";
+import { resetRidersStates, hasEveryonePlayed, aRiderHasFinished, getWinner } from "../utils";
 
 
-export const Peloton = {
+export const FlammeRuche = {
     setup: (G, ctx) => {
         let game = {
-            players: [
-                // Player(TEAM.RED, true),
-                // Player(TEAM.BLACK, true),
-                Player(TEAM.BLUE, true),
-                Player(TEAM.GREEN, false)
-            ],
-            track: Track(TRACK.FIRENZE_MILANO)
+            players: {
+                '0': Player(TEAM.BLUE, true),
+                '1': Player(TEAM.GREEN, false),
+                // '2': Player(TEAM.RED, true),
+                // '3': Player(TEAM.BLACK, true)
+            },
+            track: Track(TRACK.AVENUE_CORSO_PASEO_SHORT)
         }
 
         PlaceRiders(game)
 
         return game
     },
+
+    playerView: PlayerView.STRIP_SECRETS,
 
     phases: {
         energyPhase: {
@@ -40,7 +42,7 @@ export const Peloton = {
                 stages: {
                     pickRouleurOrSprinteur: {
                         moves: {
-                            pickRouleurOrSprinteur: (G, ctx, riderID) => pickRouleurOrSprinteur(G, ctx, riderID)
+                            pickRouleurOrSprinteur: (G, ctx, playerID, riderID) => pickRouleurOrSprinteur(G, ctx, playerID, riderID)
                         },
 
                         endIf: (G, ctx) => G.players[ctx.currentPlayer].choosenRider !== null,
@@ -49,9 +51,10 @@ export const Peloton = {
                     },
                     pickCard: {
                         moves : {
-                            pickCard: (G, ctx, cardID) => pickCard(G, ctx, cardID)
+                            pickCard: (G, ctx, cardID, playerID) => pickCard(G, ctx, cardID, playerID)
                         }
-                    }
+                    },
+                    waitingStage: {}
                 }
             },
 
@@ -63,6 +66,12 @@ export const Peloton = {
                 resolveExhaustion(G)
                 resetRidersStates(G.players)
             }
+        }
+    },
+
+    endIf: (G, ctx) => {
+        if (aRiderHasFinished(G.track)) {
+            return { winner: getWinner(G.track) };
         }
     }
 };

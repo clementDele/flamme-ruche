@@ -1,4 +1,6 @@
-import { POS, SQUARE } from "../const"
+import { POS, SQUARE, CARD, SQUARE_TYPE } from "../const";
+import { min, max } from 'lodash';
+import { nextAscentSquareDistance } from "../utils";
 
 export const NewPos = (track, steps, rider) => {
     const expectedSquare = rider.position[POS.X] + steps
@@ -15,4 +17,33 @@ export const NewPos = (track, steps, rider) => {
     } else {
         return NewPos(track, steps - 1, rider)
     }
+}
+
+export const getNextMoveFromCard = (card, squares, riderPosX) => {
+    let steps = (card === CARD.FATIGUE.LABEL) ? CARD.FATIGUE.VALUE : card
+
+    switch (squares[riderPosX].type) {
+        case SQUARE_TYPE.ASCENT:
+            steps = min([steps, 5])
+            break;
+    
+        case SQUARE_TYPE.DESCENT:
+            steps = max([steps, 5])
+            break;
+
+        case SQUARE_TYPE.ROAD:
+            if (steps > 5) {
+                // trust me, i'm an engineer
+                steps = min([max([nextAscentSquareDistance(squares, riderPosX) - 1, 5]), steps])
+            }
+            break;
+        
+        default:
+            // Do nothing
+    }
+
+    // check to avoid going off the track
+    steps = min([steps, squares.length - riderPosX])
+
+    return steps
 }
