@@ -1,5 +1,5 @@
 import { INVALID_MOVE } from "boardgame.io/core";
-import { POS, RIDER_TYPE } from "../const";
+import { POS, RIDER_TYPE, CARD } from "../const";
 import { shuffle, reverse, min } from 'lodash';
 import { getNextMoveFromCard } from "./Movement";
 
@@ -21,11 +21,21 @@ const drawCards = (G, playerID) => {
     }
 
     if (rider.deck.length < 4) {
-        rider.deck.push(...shuffle(rider.discardPile))
-        rider.deck = reverse(rider.deck)
+        // handle no cards left at all
+        if (rider.deck.length + rider.discardPile.length === 0) {
+            rider.deck.push(CARD.FATIGUE.LABEL)
+        } else {
+            rider.deck.push(...shuffle(rider.discardPile))
+            rider.deck = reverse(rider.deck)
+            rider.discardPile = []
+        }
     }
 
-    for (let i = 0; i < min([rider.deck.length, 4]); i++) rider.hand.push(rider.deck.pop());
+    const minDeckLengthOr4 = min([rider.deck.length, 4])
+    for (let i = 0; i < minDeckLengthOr4; i++) {
+        console.log("draw!", i)
+        rider.hand.push(rider.deck.pop());
+    }
 }
 
 export const pickCard = (G, ctx, cardID, playerID) => {
@@ -48,7 +58,9 @@ export const pickCard = (G, ctx, cardID, playerID) => {
         ctx.events.setStage({ stage: "waitingStage" })
     }
     else {
+        // tranform 0 to 1 and 1 to 0 
         G.players[playerID].choosenRider = 1 - G.players[playerID].choosenRider
+
         drawCards(G, playerID)
     }
 }
