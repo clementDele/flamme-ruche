@@ -12,12 +12,12 @@ export const FlammeRuche = {
     setup: (G, ctx) => {
         let game = {
             players: {
-                '0': Player(TEAM.BLUE, true),
-                '1': Player(TEAM.GREEN, false),
-                // '2': Player(TEAM.RED, true),
-                // '3': Player(TEAM.BLACK, true)
+                '0': Player(TEAM.BLUE),
+                '1': Player(TEAM.GREEN),
+                // '2': Player(TEAM.RED),
+                // '3': Player(TEAM.BLACK)
             },
-            track: Track(TRACK.AVENUE_CORSO_PASEO_SHORT)
+            track: Track(TRACK.FIRENZE_MILANO)
         }
 
         PlaceRiders(game)
