@@ -9,9 +9,9 @@ export const Hand = ({ playerID, hand, team, type, playCardFn }) => {
                 {hand.map((card, index) => (
                     <div key={index} className='card' onClick={() => playCardFn(index, playerID)}>
                         { card === CARD.FATIGUE.LABEL ? 
-                            <img src={`./cards/fatigue/${type}.png`} alt="card"/>
+                            <img src={`./img/cards/fatigue/${type}.png`} alt="card"/>
                           :
-                            <img src={`./cards/teams/${team}/${type}/${card}.png`} alt="card"/>
+                            <img src={`./img/cards/teams/${team}/${type}/${card}.png`} alt="card"/>
                         }
                     </div>))}
             </div>

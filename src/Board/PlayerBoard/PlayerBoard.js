@@ -13,7 +13,7 @@ export const PlayerBoard = ({ G, ctx, moves, playerID }) => {
         <div id="playerBoard">
             <div className='rider-cards'>
                 <div className="card" onClick={() => moves.pickRouleurOrSprinteur(playerID, RIDER_TYPE.SPRINTEUR.ID)}>
-                    <img src={`./cards/backs/${RIDER_TYPE.SPRINTEUR.ID}.png`} alt="sprinteur-deck"/>
+                    <img src={`./img/cards/backs/${RIDER_TYPE.SPRINTEUR.ID}.png`} alt="sprinteur-deck"/>
                 </div>
                 {sprinteurHand.length ? 
                     <Hand
@@ -26,7 +26,7 @@ export const PlayerBoard = ({ G, ctx, moves, playerID }) => {
             </div>
             <div className='rider-cards'>
                 <div className="card" onClick={() => moves.pickRouleurOrSprinteur(playerID, RIDER_TYPE.ROULEUR.ID)}>
-                    <img src={`./cards/backs/${RIDER_TYPE.ROULEUR.ID}.png`} alt="rouleur-deck"/>
+                    <img src={`./img/cards/backs/${RIDER_TYPE.ROULEUR.ID}.png`} alt="rouleur-deck"/>
                 </div>
                 {rouleurHand.length ? 
                     <Hand 

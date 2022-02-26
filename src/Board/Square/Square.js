@@ -11,17 +11,17 @@ export const Square = ({ square }) => {
             case SQUARE_TYPE.START:
             case SQUARE_TYPE.FINISH:
                 return {
-                    background: `url('${process.env.PUBLIC_URL}/start-finish-square.png')`,
+                    background: `url('${process.env.PUBLIC_URL}/img/squares/start-finish-square.png')`,
                     backgroundSize: "100% 100%"
                 }
             case SQUARE_TYPE.ASCENT:
                 return {
-                    background: `url('${process.env.PUBLIC_URL}/ascent-square.png')`,
+                    background: `url('${process.env.PUBLIC_URL}/img/squares/ascent-square.png')`,
                     backgroundSize: "100% 100%"
                 }
             case SQUARE_TYPE.DESCENT:
                 return {
-                    background: `url('${process.env.PUBLIC_URL}/descent-square.png')`,
+                    background: `url('${process.env.PUBLIC_URL}/img/squares/descent-square.png')`,
                     backgroundSize: "100% 100%"
                 }
             case SQUARE_TYPE.COBBLE:
@@ -30,7 +30,7 @@ export const Square = ({ square }) => {
                 }
             case SQUARE_TYPE.ROAD:
                 return {
-                    background: `url('${process.env.PUBLIC_URL}/road-square.png')`,
+                    background: `url('${process.env.PUBLIC_URL}/img/squares/road-square.png')`,
                     backgroundSize: "100% 100%"
                 }
             default:
