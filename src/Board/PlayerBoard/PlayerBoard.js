@@ -1,43 +1,77 @@
 import { React } from 'react';
 import { RIDER_TYPE } from '../../const';
+import { Deck } from '../Deck/Deck';
+import { DiscardPile } from '../DiscardPile/DiscardPile';
 import { Hand } from '../Hand/Hand';
+import { getColorOfTeam } from '../../utils';
 import './PlayerBoard.css'
 
-export const PlayerBoard = ({ G, ctx, moves, playerID }) => {
-    const rouleurHand = G.players[playerID].riders[RIDER_TYPE.ROULEUR.ID].hand
-    const sprinteurHand = G.players[playerID].riders[RIDER_TYPE.SPRINTEUR.ID].hand
+export const PlayerBoard = ({ G, moves, playerID }) => {
+    const rouleur = G.players[playerID].riders[RIDER_TYPE.ROULEUR.ID]
+    const sprinteur = G.players[playerID].riders[RIDER_TYPE.SPRINTEUR.ID]
     const team = G.players[playerID].team
-
 
     return (
         <div id="playerBoard">
-            <div className='rider-cards'>
-                <div className="card" onClick={() => moves.pickRouleurOrSprinteur(playerID, RIDER_TYPE.SPRINTEUR.ID)}>
-                    <img src={`./img/cards/backs/${RIDER_TYPE.SPRINTEUR.ID}.png`} alt="sprinteur-deck"/>
+
+            <div className='rider-playzone'>
+                <div 
+                    className='header'
+                    style={{backgroundColor: getColorOfTeam(team)}}
+                >
+                    Sprinteur 🚲
                 </div>
-                {sprinteurHand.length ? 
+                <div className='body'>
+                    <Deck
+                        moves={moves}
+                        playerID={playerID}
+                        riderTypeID={RIDER_TYPE.SPRINTEUR.ID}
+                        deckSize={sprinteur.deck.length}
+                    />
                     <Hand
                         playerID={playerID}
-                        hand={sprinteurHand} 
+                        hand={sprinteur.hand} 
                         team={team} 
                         type={RIDER_TYPE.SPRINTEUR.ID}
                         playCardFn={moves.pickCard}
-                    /> : <></>}
-            </div>
-            <div className='rider-cards'>
-                <div className="card" onClick={() => moves.pickRouleurOrSprinteur(playerID, RIDER_TYPE.ROULEUR.ID)}>
-                    <img src={`./img/cards/backs/${RIDER_TYPE.ROULEUR.ID}.png`} alt="rouleur-deck"/>
+                    />
+                    <DiscardPile 
+                        rider={sprinteur}
+                        discardPileSize={sprinteur.discardPile.length}
+                    />
                 </div>
-                {rouleurHand.length ? 
+            </div>
+
+
+            <div className='rider-playzone'>
+                <div 
+                    className='header' 
+                    style={{backgroundColor: getColorOfTeam(team)}}
+                >
+                    Rouleur 🚲
+                </div>
+                <div className='body'>
+                    <Deck
+                        moves={moves}
+                        playerID={playerID}
+                        riderTypeID={RIDER_TYPE.ROULEUR.ID}
+                        deckSize={rouleur.deck.length}
+                    />
                     <Hand 
                         playerID={playerID}
-                        hand={rouleurHand} 
+                        hand={rouleur.hand} 
                         team={team} 
                         type={RIDER_TYPE.ROULEUR.ID}
                         playCardFn={moves.pickCard}
-                    /> : <></>}
+                    /> 
+                    <DiscardPile 
+                        rider={rouleur}
+                        discardPileSize={rouleur.discardPile.length}
+                    />
+                </div>
             </div>
-            {}
+
+
         </div>
         )
 }

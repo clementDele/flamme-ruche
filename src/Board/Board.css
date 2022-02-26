@@ -1,0 +1,4 @@
+#board {
+    display: grid;
+    grid-template-rows: 40% 50%;
+}

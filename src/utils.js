@@ -76,3 +76,13 @@ export const getWinner = track => {
         if (track.squares[i].rightLane !== null) return track.squares[i].rightLane
     }
 }
+
+export const getColorOfTeam = team => {
+    switch (team) {
+        case "blue": return "#3e7ab0";
+        case "black": return "#302f2d";
+        case "green": return "#79c86b";
+        case "red": return "#e75d40";
+        default: return "black"
+    }
+}

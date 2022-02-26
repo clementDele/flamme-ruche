@@ -1,3 +1,7 @@
 .track {
-    justify-self: center;
+    max-height: 100vh;
+    overflow-x: scroll;
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: row;
 }

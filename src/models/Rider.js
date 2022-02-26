@@ -4,7 +4,7 @@ import { shuffle } from 'lodash';
 export const Rider = (type, team) => {
     return {
         id: `${type.LABEL.charAt(0)}_${team}`,
-        type: type.LABEL,
+        type: type,
         team,
         hand: [],
         deck: shuffle(type.STARTING_DECK),

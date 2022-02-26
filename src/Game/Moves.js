@@ -32,10 +32,7 @@ const drawCards = (G, playerID) => {
     }
 
     const minDeckLengthOr4 = min([rider.deck.length, 4])
-    for (let i = 0; i < minDeckLengthOr4; i++) {
-        console.log("draw!", i)
-        rider.hand.push(rider.deck.pop());
-    }
+    for (let i = 0; i < minDeckLengthOr4; i++) rider.hand.push(rider.deck.pop());
 }
 
 export const pickCard = (G, ctx, cardID, playerID) => {

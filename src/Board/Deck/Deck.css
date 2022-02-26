@@ -1,0 +1,16 @@
+.deck {
+    border: 1px solid rgb(160, 160, 160); 
+}
+
+.deck > .header {
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: grey;
+    padding: 5px 10px;
+}
+
+.deck > .body {
+    display:flex;
+}

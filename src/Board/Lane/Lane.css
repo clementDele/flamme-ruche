@@ -1,4 +1,11 @@
 .lane {
     display: grid;
-    grid-template-columns: 50% 50%;
+}
+
+.lane-right {
+    grid-template-rows: 55%;
+}
+
+.lane-left {
+    grid-template-rows: 2%;
 }

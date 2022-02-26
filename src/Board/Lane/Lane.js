@@ -9,8 +9,8 @@ export const Lane = ({ lane, position }) => {
     const rider = lane
 
     return (
-        <div className="lane">
-            {position === "right" ? <div></div> : <></>}
+        <div className={`lane lane-${position}`} >
+            <div></div>
             {rider !== null ? <Rider rider={rider}></Rider> : <></>}
             {position === "left" ? <div></div> : <></>}
         </div>
