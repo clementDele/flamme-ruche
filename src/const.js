@@ -123,54 +123,54 @@ const FIRENZE_MILANO = {
     NAME: "Firenze-Milano",
     TILES: [a, b, c, g, i, D, H, q, n, t, m, K, O, L, r, e, p, J, s, f, u]
 };
-const LA_HAUTE_MONTAGNE = [
-    ["La Haute Montagne"],
-    [a, b, c, f, i, m, e, t, K, G, L, H, J, s, d, o, p, R, Q, N, U]
-];
-const LE_COL_DU_BALLON = [
-    ["Le Col du Ballon"],
-    [A, n, L, H, g, c, e, q, t, r, M, B, o, i, p, j, D, F, k, S, u]
-];
-const RONDE_VAN_WELVEGEN = [
-    ["Ronde van Welvelgen"],
-    [a, b, c, m, g, f, t, e, q, o, n, L, P, j, k, I, D, H, r, S, u]
-];
-const LA_CLASSISISSIMA = [
-    ["La Classisissima"],
-    [A, e, b, Q, R, N, H, P, c, g, i, k, D, F, s, L, o, j, m, t, u]
-];
-const CLASSIQUE_DAVRIL = [
-    ["Classique d'Avril"],
-    [A, b, J, i, L, c, G, H, t, d, f, p, k, m, n, r, q, E, o, S, u]
-];
-const SPRINT_DE_MONTAGNE = [
-    ["Sprint de Montagne"],
-    [a, f, C, O, L, i, b, N, D, P, S, g, T, k, e, r, j, Q, H, m, u]
-];
-const VITTEL = [
-    ["Vittel - La Planche des Belles Filles"],
-    [a, I, H, d, T, F, l, j, s, M, N, P, B, C, O, R, K, G, Q, E, U]
-];
-const DOLE = [
-    ["Dole - Stations des Rousses"],
-    [a, j, f, M, E, C, T, K, s, q, R, L, P, H, i, D, B, N, O, g, u]
-];
-const NANTUA = [
-    ["Nantua - Chambery"],
-    [a, N, P, H, t, i, m, O, E, L, K, R, B, S, J, C, Q, D, F, g, u]
-];
-const PAU = [
-    ["Pau - Payragudes"],
-    [a, t, s, m, C, J, d, i, f, N, B, E, R, K, O, L, P, H, G, Q, U]
-];
-const ASGER = [
-    ["Col d'Asger"],
-    [a, c, P, H, F, B, l, j, I, d, K, Q, R, s, m, t, G, E, O, N, U]
-];
-const ENTRE_COTES = [
-    ["L'Entre-Côtes"],
-    [a, d, e, N, i, b, j, p, O, K, R, L, t, C, F, S, q, M, h, u]
-];
+const LA_HAUTE_MONTAGNE = {
+    NAME: "La Haute Montagne",
+    TILES: [a, b, c, f, i, m, e, t, K, G, L, H, J, s, d, o, p, R, Q, N, U]
+};
+const LE_COL_DU_BALLON = {
+    NAME: "Le Col du Ballon",
+    TILES: [A, n, L, H, g, c, e, q, t, r, M, B, o, i, p, j, D, F, k, S, u]
+};
+const RONDE_VAN_WELVEGEN = {
+    NAME: "Ronde van Welvelgen",
+    TILES: [a, b, c, m, g, f, t, e, q, o, n, L, P, j, k, I, D, H, r, S, u]
+};
+const LA_CLASSISISSIMA = {
+    NAME: "La Classisissima",
+    TILES: [A, e, b, Q, R, N, H, P, c, g, i, k, D, F, s, L, o, j, m, t, u]
+};
+const CLASSIQUE_DAVRIL = {
+    NAME: "Classique d'Avril",
+    TILES: [A, b, J, i, L, c, G, H, t, d, f, p, k, m, n, r, q, E, o, S, u]
+};
+const SPRINT_DE_MONTAGNE = {
+    NAME: "Sprint de Montagne",
+    TILES: [a, f, C, O, L, i, b, N, D, P, S, g, T, k, e, r, j, Q, H, m, u]
+};
+const VITTEL = {
+    NAME: "Vittel - La Planche des Belles Filles",
+    TILES: [a, I, H, d, T, F, l, j, s, M, N, P, B, C, O, R, K, G, Q, E, U]
+};
+const DOLE = {
+    NAME: "Dole - Stations des Rousses",
+    TILES: [a, j, f, M, E, C, T, K, s, q, R, L, P, H, i, D, B, N, O, g, u]
+};
+const NANTUA = {
+    NAME: "Nantua - Chambery",
+    TILES: [a, N, P, H, t, i, m, O, E, L, K, R, B, S, J, C, Q, D, F, g, u]
+};
+const PAU = {
+    NAME: "Pau - Payragudes",
+    TILES: [a, t, s, m, C, J, d, i, f, N, B, E, R, K, O, L, P, H, G, Q, U]
+};
+const ASGER = {
+    NAME: "Col d'Asger",
+    TILES: [a, c, P, H, F, B, l, j, I, d, K, Q, R, s, m, t, G, E, O, N, U]
+};
+const ENTRE_COTES = {
+    NAME: "L'Entre-Côtes",
+    TILES: [a, d, e, N, i, b, j, p, O, K, R, L, t, C, F, S, q, M, h, u]
+};
 
 export const TRACK = {
     AVENUE_CORSO_PASEO,
