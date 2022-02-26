@@ -1,4 +1,4 @@
-import { CARD, POS, SQUARE } from "../const";
+import { CARD, POS, SQUARE, SQUARE_TYPE } from "../const";
 import { getRiderOrder, getRiderFromRiderId } from "../utils";
 import { NewPos } from "./Movement";
 
@@ -37,25 +37,29 @@ export const resolveSlipstream = G => {
             if (G.track.squares[posX].rightLane !== null) {
 
                 //checks if there is a slipstream (x+1 empty and a rider in x+2)
-                if (G.track.squares[posX+1].rightLane === null && G.track.squares[posX+2].rightLane !== null) {                    
-                    //then clear the previous pos and setting new pos for both rightlane and leftlane
-                    let riderIDRight = G.track.squares[posX].rightLane
-                    let riderRight = getRiderFromRiderId(G.players, riderIDRight)
+                if (G.track.squares[posX+1].rightLane === null && G.track.squares[posX+2].rightLane !== null) {   
                     
-                    G.track.squares[posX].rightLane = null 
-                    G.track.squares[posX+1].rightLane = riderIDRight
-                    riderRight.position[POS.X] += 1  
-                    
-                    if (G.track.squares[posX].leftLane !== null) {
-                        let riderIDLeft = G.track.squares[posX].leftLane
-                        let riderLeft = getRiderFromRiderId(G.players, riderIDLeft)
+                    // slipstream is only given if current rider or rider giving slipstream is not on ascent
+                    if (G.track.squares[posX].type !== SQUARE_TYPE.ASCENT && G.track.squares[posX+2].type !== SQUARE_TYPE.ASCENT) {
+                        //then clear the previous pos and setting new pos for both rightlane and leftlane
+                        let riderIDRight = G.track.squares[posX].rightLane
+                        let riderRight = getRiderFromRiderId(G.players, riderIDRight)
 
-                        G.track.squares[posX].leftLane = null
-                        G.track.squares[posX+1].leftLane = riderIDLeft
-                        riderLeft.position[POS.X] += 1 
-                    }                     
+                        G.track.squares[posX].rightLane = null 
+                        G.track.squares[posX+1].rightLane = riderIDRight
+                        riderRight.position[POS.X] += 1  
 
-                    repeat = true //update
+                        if (G.track.squares[posX].leftLane !== null) {
+                            let riderIDLeft = G.track.squares[posX].leftLane
+                            let riderLeft = getRiderFromRiderId(G.players, riderIDLeft)
+
+                            G.track.squares[posX].leftLane = null
+                            G.track.squares[posX+1].leftLane = riderIDLeft
+                            riderLeft.position[POS.X] += 1 
+                        }                     
+
+                        repeat = true //update
+                    }
                 }
             }
         }
