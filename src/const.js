@@ -121,7 +121,29 @@ const AVENUE_CORSO_PASEO_SHORT = {
 };
 const FIRENZE_MILANO = {
     NAME: "Firenze-Milano",
-    TILES: [a, b, c, g, i, D, H, q, n, t, m, K, O, L, r, e, p, J, s, f, u]
+    TILES: [
+        { name: "a_", squares: a }, 
+        { name: "b_", squares: b }, 
+        { name: "c_", squares: c }, 
+        { name: "g_", squares: g }, 
+        { name: "i_", squares: i }, 
+        { name: "D", squares: D }, 
+        { name: "H", squares: H }, 
+        { name: "q_", squares: q }, 
+        { name: "n_", squares: n }, 
+        { name: "t_", squares: t }, 
+        { name: "m_", squares: m }, 
+        { name: "K", squares: K }, 
+        { name: "O", squares: O }, 
+        { name: "L", squares: L }, 
+        { name: "r_", squares: r }, 
+        { name: "e_", squares: e }, 
+        { name: "p_", squares: p }, 
+        { name: "J", squares: J }, 
+        { name: "s_", squares: s }, 
+        { name: "f_", squares: f }, 
+        { name: "u_", squares: u }
+    ]
 };
 const LA_HAUTE_MONTAGNE = {
     NAME: "La Haute Montagne",

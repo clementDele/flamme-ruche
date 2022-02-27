@@ -2,21 +2,23 @@ import { SQUARE_TYPE } from "../const";
 import { Square } from "./Square";
 
 export const Track = stage => {
-    const squares = buildTrackSquares(stage.TILES)
+    const tiles = stage.TILES
+    const squares = buildTrackSquares(tiles)
     const startLine = getStartLine(squares)
     const finishLine = getFinishLine(squares)
 
     return {
+        tiles,
         squares,
         startLine,
         finishLine
     }
 }
 
-const buildTrackSquares = stageTiles =>  {
+const buildTrackSquares = tiles =>  {
     let squares = [] 
-    stageTiles.forEach(t => {
-        squares.push(...t)
+    tiles.forEach(t => {
+        squares.push(...t.squares)
     });
     return squares.map(sq => Square(sq))
 }
